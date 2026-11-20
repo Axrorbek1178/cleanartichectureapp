@@ -5,6 +5,7 @@ import 'package:quiz_app/features/home/data/datasources/user_remote_data_source.
 import 'package:quiz_app/features/home/data/repositories_impl/photo_repository_impl.dart';
 import 'package:quiz_app/features/home/domain/usecases/get_photos_usecase.dart';
 import 'package:quiz_app/features/home/presentation/bloc/photo_bloc.dart';
+import 'package:quiz_app/features/users/presentation/pages/users_page.dart';
 
 class PhotoPage extends StatelessWidget {
   const PhotoPage({super.key});
@@ -24,7 +25,7 @@ class PhotoPage extends StatelessWidget {
         child: BlocBuilder<PhotoBloc, PhotoState>(
           builder: (context, state) {
             if (state is PhotoLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator.adaptive());
             } else if (state is PhotoLoaded) {
               return ListView.builder(
                 itemCount: state.photos.length,
@@ -40,6 +41,10 @@ class PhotoPage extends StatelessWidget {
                     ),
                     title: Text(photo.title),
                     subtitle: Text("ID: ${photo.id}"),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => UsersPage()),
+                    ),
                   );
                 },
               );

@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz_app/features/home/presentation/pages/photo_page.dart';
+import 'package:quiz_app/core/di/injection.dart';
+import 'package:quiz_app/features/splash/splash_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await initDI();
   runApp(
     EasyLocalization(
       supportedLocales: [
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
-      home: PhotoPage(),
+      home: const SplashPage(),
     );
   }
 }
